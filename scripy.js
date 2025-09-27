@@ -12,6 +12,10 @@ let bird_props = bird.getBoundingClientRect();
 // This method returns DOMReact -> top, right, bottom, left, x, y, width and height
 let background = document.querySelector('.background').getBoundingClientRect();
 
+//
+let bacground = document.querySelector('.background').style.backgroundImage="url('./background-img.png')";
+
+
 let score_val = document.querySelector('.score_val');
 let message = document.querySelector('.message');
 let score_title = document.querySelector('.score_title');
@@ -132,4 +136,5 @@ function play(){
     requestAnimationFrame(create_pipe);
 
 }
+
 
