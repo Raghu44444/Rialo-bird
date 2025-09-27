@@ -13,7 +13,7 @@ let bird_props = bird.getBoundingClientRect();
 let background = document.querySelector('.background').getBoundingClientRect();
 
 //
-let bacground = document.querySelector('.background').style.backgroundImage="url('./background-img.png')";
+let background = document.querySelector('.background').style.backgroundImage="url('./background-img.png')";
 
 
 let score_val = document.querySelector('.score_val');
@@ -136,5 +136,6 @@ function play(){
     requestAnimationFrame(create_pipe);
 
 }
+
 
 
