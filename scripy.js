@@ -165,17 +165,45 @@ window.addEventListener('resize', () => (bgRect = bgEl.getBoundingClientRect()))
 new Image().src = './background-img.png';
 
 // ----- start game on Enter -----
+// document.addEventListener('keydown', (e) => {
+//   if (e.key === 'Enter' && game_state !== 'Play') {
+//     // switch background to in-game image
+//     bgEl.style.backgroundImage = 'url("./background-img.png")';
+//     bgEl.style.backgroundAttachment = 'scroll';
+//     bgEl.style.backgroundRepeat = 'no-repeat';
+//     bgEl.style.backgroundPosition = 'center';
+//     bgEl.style.backgroundSize = 'cover';
+//     bgRect = bgEl.getBoundingClientRect();
+
+//     // reset world
+//     document.querySelectorAll('.pipe_sprite').forEach(el => el.remove());
+//     img.style.display = 'block';
+//     bird.style.top = '40vh';
+//     scoreTitle.textContent = 'Score : ';
+//     scoreVal.textContent = '0';
+//     messageEl.textContent = '';
+//     messageEl.classList.remove('messageStyle');
+
+//     game_state = 'Play';
+//     play();
+//   }
+// });
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && game_state !== 'Play') {
-    // switch background to in-game image
-    bgEl.style.backgroundImage = 'url("./background-img.png")';
-    bgEl.style.backgroundAttachment = 'scroll';
-    bgEl.style.backgroundRepeat = 'no-repeat';
-    bgEl.style.backgroundPosition = 'center';
+
+    // FORCE background swap (overrides any prior CSS)
+    const v = Date.now(); // cache-bust
+    bgEl.style.setProperty(
+      'background',
+      `url("./background-img.png?v=${v}") no-repeat center center`,
+      'important'
+    );
     bgEl.style.backgroundSize = 'cover';
+    bgEl.style.backgroundAttachment = 'scroll';
+
     bgRect = bgEl.getBoundingClientRect();
 
-    // reset world
+    // reset & start
     document.querySelectorAll('.pipe_sprite').forEach(el => el.remove());
     img.style.display = 'block';
     bird.style.top = '40vh';
@@ -183,11 +211,11 @@ document.addEventListener('keydown', (e) => {
     scoreVal.textContent = '0';
     messageEl.textContent = '';
     messageEl.classList.remove('messageStyle');
-
     game_state = 'Play';
     play();
   }
 });
+
 
 // ----- bird control (pressed / released) -----
 let bird_dy = 0;
@@ -313,6 +341,7 @@ function play() {
   requestAnimationFrame(apply_gravity);
   requestAnimationFrame(create_pipe);
 }
+
 
 
 
