@@ -200,7 +200,15 @@ document.addEventListener('keydown', (e) => {
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
             e.remove();
         });
-      
+      // FORCE inline swap (overrides any previous background & caching)
+bgEl.style.removeProperty('background');
+bgEl.style.background = `url("./background-img.png?v=${Date.now()}") no-repeat center center`;
+bgEl.style.backgroundSize = 'cover';
+bgEl.style.backgroundAttachment = 'scroll';
+
+// refresh rect
+background = bgEl.getBoundingClientRect();
+
         img.style.display = 'block';
         bird.style.top = '40vh';
         game_state = 'Play';
@@ -307,6 +315,7 @@ function play(){
     requestAnimationFrame(create_pipe);
 
 }
+
 
 
 
