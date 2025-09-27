@@ -8,6 +8,14 @@ let sound_die = new Audio('sounds effect/die.mp3');
 
 // getting bird element properties
 let bird_props = bird.getBoundingClientRect();
+//
+// ADD
+let bgEl = document.querySelector('.background');       // element ref
+new Image().src = './background-img.png';                 // preload game bg
+window.addEventListener('resize', () => {                 // keep rect fresh
+  background = bgEl.getBoundingClientRect();
+});
+
 
 // This method returns DOMReact -> top, right, bottom, left, x, y, width and height
 let background = document.querySelector('.background').getBoundingClientRect();
@@ -29,6 +37,16 @@ document.addEventListener('keydown', (e) => {
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
             e.remove();
         });
+        // ADD: switch to in-game background and recompute rect
+bgEl.style.setProperty(
+  'background',
+  'url("./background-img.png") no-repeat center center',
+  'important'
+);
+bgEl.style.backgroundSize = 'cover';
+bgEl.style.backgroundAttachment = 'scroll';
+background = bgEl.getBoundingClientRect();
+
         img.style.display = 'block';
         bird.style.top = '40vh';
         game_state = 'Play';
@@ -135,4 +153,5 @@ function play(){
     requestAnimationFrame(create_pipe);
 
 }
+
 
